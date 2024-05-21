@@ -10,8 +10,8 @@ const itemsRouter = require("./items/router");
 
 router.use("/items", itemsRouter);
 
-const { browse } = require("../../controllers/programsActions");
+const programsRouter = require("./programs/router");
 
-router.get("/programs", browse);
+router.use("/programs", programsRouter);
 
 module.exports = router;

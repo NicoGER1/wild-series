@@ -1,4 +1,3 @@
-
 // Import access to database tables
 const tables = require("../../database/tables");
 

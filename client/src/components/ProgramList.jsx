@@ -1,10 +1,13 @@
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 function ProgramList({ programs }) {
   return (
     <ul>
-      {programs.map((program) => (
-        <li key={program.id}>{program.title}</li>
+      {programs?.map((program) => (
+        <li key={program.id}>
+          <Link to={`/programs/${program.id}`}>{program.title}</Link>
+        </li>
       ))}
     </ul>
   );

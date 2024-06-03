@@ -29,6 +29,16 @@ class ProgramSeeder extends AbstractSeeder {
         year: 2017,
         category_id: this.getRef("category_Science-Fiction").insertId,
       },
+      {
+        title: "Arcane",
+        synopsis:
+          "Championnes de leurs villes jumelles et rivales, deux sœurs se battent dans une guerre où font rage des technologies magiques et des perspectives diamétralement opposées.",
+        poster:
+          "https://img.betaseries.com/SS6I4kiRKFoTErl1pev6nbWzNOo=/600x900/smart/https%3A%2F%2Fpictures.betaseries.com%2Ffonds%2Fposter%2F9ad9ec2a96fe47913df092037536e4ae.jpg",
+        country: "États-Unis",
+        year: 2021,
+        category_id: this.getRef("category_Science-Fiction").insertId,
+      },
     ];
 
     programs.forEach((program) => {

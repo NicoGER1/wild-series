@@ -6,7 +6,6 @@ const ProgramSchema = Joi.object({
   poster: Joi.string().max(255).required(),
   country: Joi.string().max(255).required(),
   year: Joi.number().integer().required(),
-  
 });
 
 const validateProgram = (req, res, next) => {

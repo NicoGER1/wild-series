@@ -15,6 +15,7 @@ const {
   destroy,
 } = require("../../../controllers/programsActions");
 
+const validatePrograms = require("../../../services/validatePrograms");
 // Route to get a list of programs
 router.get("/", browse);
 
@@ -22,10 +23,10 @@ router.get("/", browse);
 router.get("/:id", read);
 
 // Route to edit an existing program
-router.put("/:id", edit);
+router.put("/:id", validatePrograms, edit);
 
 // Route to add a new program
-router.post("/", add);
+router.post("/", validatePrograms, add);
 
 // Route to edit an existing program
 router.delete("/:id", destroy);

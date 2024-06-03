@@ -1,34 +1,29 @@
 
-// Import the repository modules responsible for handling data operations on the tables
-const CategoryRepository = require("./models/CategoryRepository");
-const ItemRepository = require("./models/ItemRepository");
-const ProgramRepository = require("./models/ProgramRepository");
+create table user (
+  id int unsigned primary key auto_increment not null,
+  email varchar(255) not null unique,
+  password varchar(255) not null
+);
 
-// Create an empty object to hold data repositories for different tables
-const tables = {};
+create table item (
+  id int unsigned primary key auto_increment not null,
+  title varchar(255) not null,
+  user_id int unsigned not null,
+  foreign key(user_id) references user(id)
+);
 
-/* ************************************************************************* */
-// Register data repositories for tables
-/* ************************************************************************* */
+create table category (
+  id int unsigned primary key auto_increment not null,
+  name varchar(255) not null unique
+);
 
-// Register each repository as data access point for its table
-tables.category = new CategoryRepository();
-tables.item = new ItemRepository();
-tables.program = new ProgramRepository();
-
-/* ************************************************************************* */
-
-// Use a Proxy to customize error messages when trying to access a non-existing table
-
-// Export the Proxy instance with custom error handling
-module.exports = new Proxy(tables, {
-  get(obj, prop) {
-    // Check if the property (table) exists in the tables object
-    if (prop in obj) return obj[prop];
-
-    // If the property (table) does not exist, throw a ReferenceError with a custom error message
-    throw new ReferenceError(
-      `tables.${prop} is not defined. Did you register it in ${__filename}?`
-    );
-  },
-});
+create table program (
+  id int unsigned primary key auto_increment not null,
+  title varchar(255) not null,
+  synopsis text not null,
+  poster varchar(255) not null,
+  country varchar(100) not null,
+  year int not null,
+  category_id int unsigned not null,
+  foreign key(category_id) references category(id)
+);

@@ -1,23 +1,28 @@
-// Import database client
-const database = require("../client");
+const AbstractSeeder = require("./AbstractSeeder");
 
-// Provide database access through AbstractRepository class
-class AbstractRepository {
-  constructor({ table }) {
-    // thx https://www.codeheroes.fr/2017/11/08/js-classes-abstraites-et-interfaces/
-    if (this.constructor === AbstractRepository) {
-      throw new TypeError(
-        "Abstract class 'AbstractRepository' cannot be instantiated directly"
-      );
+class UserSeeder extends AbstractSeeder {
+  constructor() {
+    // Call the constructor of the parent class (AbstractSeeder) with appropriate options
+    super({ table: "user", truncate: true });
+  }
+
+  // The run method - Populate the 'user' table with fake data
+
+  run() {
+    // Generate and insert fake data into the 'user' table
+    for (let i = 0; i < 10; i += 1) {
+      // Generate fake user data
+      const fakeUser = {
+        email: this.faker.internet.email(), // Generate a fake email using faker library
+        password: this.faker.internet.password(), // Generate a fake password using faker library
+        refName: `user_${i}`, // Create a reference name for the user
+      };
+
+      // Insert the fakeUser data into the 'user' table
+      this.insert(fakeUser); // insert into user(email, password) values (?, ?)
     }
-
-    // Store the table name
-    this.table = table;
-
-    // Provide access to the database client
-    this.database = database;
   }
 }
 
-// Ready to export
-module.exports = AbstractRepository;
+// Export the UserSeeder class
+module.exports = UserSeeder;
